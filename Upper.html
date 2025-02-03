@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上身</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f8f8f8;
+        }
+        .sidebar {
+            width: 200px;
+            background: #333;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+        }
+        .sidebar h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 8px;
+        }
+        .sidebar ul li a:hover {
+            background: #555;
+        }
+        .container {
+            margin-left: 240px;  /* 留出側邊欄的空間 */
+            padding: 20px;
+            flex: 1;  /* 讓容器佔據剩餘空間 */
+            display: flex;
+            flex-direction: column;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);  /* 平均分配三個欄位 */
+            gap: 20px;
+        }
+        .product {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .product img {
+            width: 100%;
+            max-width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .product h3 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .product p {
+            color: #e60012;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>分類</h2>
+        <ul>
+            <li><a href="#">上身</a></li>
+            <li><a href="#">下身</a></li>
+            <li><a href="#">外套</a></li>
+            <li><a href="#">內搭</a></li>
+            <li><a href="#">配件</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h1>最新商品</h1>
+        <div class="product-grid">
+            <div class="product">
+                <img src="https://via.placeholder.com/300" alt="商品圖片">
+                <h3>上身1</h3>
+                <p>$1000</p>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/300" alt="商品圖片">
+                <h3>商品名稱2</h3>
+                <p>$1200</p>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/300" alt="商品圖片">
+                <h3>商品名稱3</h3>
+                <p>$1500</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
