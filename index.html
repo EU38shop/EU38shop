@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>服飾展示網站</title>
+    <title>EU38shop</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -41,9 +41,9 @@
             background: #555;
         }
         .container {
-            margin-left: 240px;  /* 留出側邊欄的空間 */
+            margin-left: 240px;
             padding: 20px;
-            flex: 1;  /* 讓容器佔據剩餘空間 */
+            flex: 1;
             display: flex;
             flex-direction: column;
         }
@@ -69,7 +69,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: none;    
+            display: none;
         }
         .carousel img.active {
             display: block;
@@ -102,99 +102,38 @@
         </ul>
     </div>
     <div class="container">
-        <h1>最新商品</h1>
-        <div class="product-grid">
-            <div class="product">
-                <div class="carousel">
-                    <img src="https://i.imgur.com/snLjHo3.jpg" class="active" alt="商品圖片1-1">
-                    <img src="https://i.imgur.com/Z2hs8Zk.jpg" alt="商品圖片1-2">
-                    <img src="https://i.imgur.com/9whB0bx.jpg" alt="商品圖片1-3">
-                    <button class="prev">❮</button>
-                    <button class="next">❯</button>
-                </div>
-                <h3>商品名稱1</h3>
-                <p>$1000</p>
-            </div>
-            <div class="product">
-                <div class="carousel">
-                    <img src="https://i.imgur.com/xWkmjDu.jpg" class="active" alt="SDW001-1">
-                    <img src="https://i.imgur.com/9Ps8KV0.jpg" alt="SDW001-2">
-                    <img src="https://i.imgur.com/TDi54C2.jpg" alt="SDW001-3">
-                    <button class="prev">❮</button>
-                    <button class="next">❯</button>
-                </div>
-                <h3>商品名稱2</h3>
-                <p>$1200</p>
-            </div>
-            <div class="product">
-                <div class="carousel">
-                    <img src="https://i.imgur.com/VnDRL9B.jpg" class="active" alt="SDW002-1" >
-                    <img src="https://i.imgur.com/Z9T5oeg.jpg" alt="SDW002-2">
-                    <img src="https://i.imgur.com/vZE5vlK.jpg" alt="SDW002-3">
-                    <button class="prev">❮</button>
-                    <button class="next">❯</button>
-                </div>
-                <h3>商品名稱3</h3>
-                <p>$1200</p>
-            </div>
-            <div class="product">
-                <div class="carousel">
-                    <img src="https://via.placeholder.com/300/FF00FF" class="active" >
-                    <img src="https://via.placeholder.com/300/FFFF00" >
-                    <img src="https://via.placeholder.com/300/00FFFF" ">
-                    <button class="prev">❮</button>
-                    <button class="next">❯</button>
-                </div>
-                <h3>商品名稱4</h3>
-                <p>$1200</p>
-            </div>
-            <div class="product">
-                <div class="carousel">
-                    <img src="https://i.imgur.com/snLjHo3.jpg" class="active" alt="商品圖片2-1">
-                    <img src="https://i.imgur.com/Z2hs8Zk.jpg" alt="商品圖片2-2">
-                    <img src="https://i.imgur.com/9whB0bx.jpg" alt="商品圖片2-3">
-                    <button class="prev">❮</button>
-                    <button class="next">❯</button>
-                </div>
-                <h3>商品名稱5</h3>
-                <p>$1200</p>
-            </div>
-            <div class="product">
-                <div class="carousel">
-                    <img src="https://via.placeholder.com/300/FF00FF" class="active" alt="商品圖片2-1">
-                    <img src="https://via.placeholder.com/300/FFFF00" alt="商品圖片2-2">
-                    <img src="https://via.placeholder.com/300/00FFFF" alt="商品圖片2-3">
-                    <button class="prev">❮</button>
-                    <button class="next">❯</button>
-                </div>
-                <h3>商品名稱6</h3>
-                <p>$1200</p>
-            </div>
-            <div class="product">
-                <div class="carousel">
-                    <img src="https://via.placeholder.com/300/FF00FF" class="active" alt="商品圖片2-1">
-                    <img src="https://via.placeholder.com/300/FFFF00" alt="商品圖片2-2">
-                    <img src="https://via.placeholder.com/300/00FFFF" alt="商品圖片2-3">
-                    <button class="prev">❮</button>
-                    <button class="next">❯</button>
-                </div>
-                <h3>商品名稱7</h3>
-                <p>$1200</p>
-            </div>
-            <div class="product">
-                <div class="carousel">
-                    <img src="https://via.placeholder.com/300/FF00FF" class="active" alt="商品圖片2-1">
-                    <img src="https://via.placeholder.com/300/FFFF00" alt="商品圖片2-2">
-                    <img src="https://via.placeholder.com/300/00FFFF" alt="商品圖片2-3">
-                    <button class="prev">❮</button>
-                    <button class="next">❯</button>
-                </div>
-                <h3>商品名稱8</h3>
-                <p>$1200</p>
-            </div>
-        </div>
+        <h1>最新上架商品</h1>
+        <div class="product-grid" id="productGrid"></div>
     </div>
     <script>
+        const products = [
+            { name: "商品名稱1", price: 1000, images: ["https://i.imgur.com/snLjHo3.jpg", "https://i.imgur.com/Z2hs8Zk.jpg", "https://i.imgur.com/9whB0bx.jpg"] },
+            { name: "商品名稱2", price: 1200, images: ["https://i.imgur.com/xWkmjDu.jpg", "https://i.imgur.com/9Ps8KV0.jpg", "https://i.imgur.com/TDi54C2.jpg"] },
+            { name: "商品名稱3", price: 1200, images: ["https://i.imgur.com/VnDRL9B.jpg", "https://i.imgur.com/Z9T5oeg.jpg", "https://i.imgur.com/vZE5vlK.jpg"] },
+            { name: "商品名稱4", price: 1200, images: ["https://i.imgur.com/VbZrfbE.jpg", "https://i.imgur.com/Doks3DG.jpg", "https://i.imgur.com/JKh5ZQs.jpg"] },
+            { name: "商品名稱5", price: 1200, images: ["https://i.imgur.com/sA5P4WB.jpg", "https://i.imgur.com/1RXipBp.jpg", "https://i.imgur.com/TjQLENx.jpg"] }
+        ];
+
+        const productGrid = document.getElementById("productGrid");
+
+        products.forEach(product => {
+            let imagesHTML = product.images.map((src, i) => 
+                `<img src="${src}" class="${i === 0 ? 'active' : ''}" alt="${product.name}-${i + 1}">`
+            ).join('');
+
+            productGrid.innerHTML += `
+                <div class="product">
+                    <div class="carousel">
+                        ${imagesHTML}
+                        <button class="prev">❮</button>
+                        <button class="next">❯</button>
+                    </div>
+                    <h3>${product.name}</h3>
+                    <p>$${product.price}</p>
+                </div>
+            `;
+        });
+
         document.querySelectorAll('.carousel').forEach(carousel => {
             let images = carousel.querySelectorAll('img');
             let currentIndex = 0;
