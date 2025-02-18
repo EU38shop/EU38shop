@@ -30,7 +30,7 @@
             font-size: 20px;
             padding: 10px;
             cursor: pointer;
-            z-index: 1000;
+            z-index: 1100;
         }
         .sidebar {
             width: 200px;
@@ -130,12 +130,18 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+        @media (min-width: 769px) {
+            .menu-toggle {
+                display: none; /* 在桌面模式隱藏按鈕 */
+            }  
+        }
     </style>
 </head>
 <body>
     <button class="menu-toggle">☰</button>
     <div class="sidebar">
-        <h2>分類</h2>
+        <h2>  <h> </h2>
+            <br>
         <ul>
             <li><a href="index.html">首頁</a></li>
             <li><a href="Upper.html">上身</a></li>
@@ -146,7 +152,8 @@
         </ul>
     </div>
     <div class="container">
-        <h1>最新上架商品</h1>
+        <br>
+        <h1>   最新上架商品</h1>
         <div class="product-grid" id="productGrid"></div>
     </div>
     <script>
