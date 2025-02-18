@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>EU38shop</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f8f8f8;
+            overflow-x: hidden;
+            width: 100%;
+        }
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: #333;
+            color: white;
+            border: none;
+            font-size: 20px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .sidebar {
+            width: 200px;
+            background: #333;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            transition: left 0.3s;
+        }
+        .sidebar h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 8px;
+        }
+        .sidebar ul li a:hover {
+            background: #555;
+        }
+        .container {
+            margin-left: 240px;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .product {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+        .carousel {
+            position: relative;
+        }
+        .carousel img {
+            display: none;
+            width: 100%;
+            border-radius: 10px;
+        }
+        .carousel img.active {
+            display: block;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .prev {
+            left: 5px;
+        }
+        .next {
+            right: 5px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                left: -220px;
+            }
+            .container {
+                margin-left: 0;
+                width: 100%;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .sidebar.active {
+                left: 0;
+            }
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle">☰</button>
+    <div class="sidebar">
+        <h2>分類</h2>
+        <ul>
+            <li><a href="index.html">首頁</a></li>
+            <li><a href="Upper.html">上身</a></li>
+            <li><a href="#">下身</a></li>
+            <li><a href="#">外套</a></li>
+            <li><a href="#">內搭</a></li>
+            <li><a href="#">配件</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h1>最新上架商品</h1>
+        <div class="product-grid" id="productGrid"></div>
+    </div>
+    <script>
+        document.querySelector('.menu-toggle').addEventListener('click', function () {
+            document.querySelector('.sidebar').classList.toggle('active');
+        });
+
+        const products = [
+            { name: "商品名稱1", price: 1000, images: ["https://i.imgur.com/snLjHo3.jpg", "https://i.imgur.com/Z2hs8Zk.jpg", "https://i.imgur.com/9whB0bx.jpg"] },
+            { name: "商品名稱2", price: 1200, images: ["https://i.imgur.com/xWkmjDu.jpg", "https://i.imgur.com/9Ps8KV0.jpg", "https://i.imgur.com/TDi54C2.jpg"] },
+            { name: "商品名稱3", price: 1200, images: ["https://i.imgur.com/VnDRL9B.jpg", "https://i.imgur.com/Z9T5oeg.jpg", "https://i.imgur.com/vZE5vlK.jpg"] },
+            { name: "商品名稱4", price: 1200, images: ["https://i.imgur.com/VbZrfbE.jpg", "https://i.imgur.com/Doks3DG.jpg", "https://i.imgur.com/JKh5ZQs.jpg"] },
+            { name: "商品名稱5", price: 1200, images: ["https://i.imgur.com/sA5P4WB.jpg", "https://i.imgur.com/1RXipBp.jpg", "https://i.imgur.com/TjQLENx.jpg"] }
+        ];
+
+        const productGrid = document.getElementById("productGrid");
+
+        products.forEach(product => {
+            let imagesHTML = product.images.map((src, i) => 
+                `<img src="${src}" class="${i === 0 ? 'active' : ''}" alt="${product.name}-${i + 1}">`
+            ).join('');
+
+            productGrid.innerHTML += 
+                `<div class="product">
+                    <div class="carousel">
+                        ${imagesHTML}
+                        <button class="prev">❮</button>
+                        <button class="next">❯</button>
+                    </div>
+                    <h3>${product.name}</h3>
+                    <p>$${product.price}</p>
+                </div>`;
+        });
+
+        document.querySelectorAll('.carousel').forEach(carousel => {
+            let images = carousel.querySelectorAll('img');
+            let index = 0;
+            const prevBtn = carousel.querySelector('.prev');
+            const nextBtn = carousel.querySelector('.next');
+
+            function showImage(i) {
+                images.forEach(img => img.classList.remove('active'));
+                images[i].classList.add('active');
+            }
+
+            prevBtn.addEventListener('click', () => {
+                index = (index - 1 + images.length) % images.length;
+                showImage(index);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                index = (index + 1) % images.length;
+                showImage(index);
+            });
+        });
+    </script>
+</body>
+</html>
